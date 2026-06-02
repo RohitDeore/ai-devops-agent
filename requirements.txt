@@ -21,3 +21,6 @@ openai>=1.12.0
 
 # Environment variable management (.env support)
 python-dotenv>=1.0.0
+
+# Testing
+pytest>=9.0.0
