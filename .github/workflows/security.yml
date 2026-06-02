@@ -1,0 +1,103 @@
+name: Security & Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1'   # every Monday at 06:00 UTC
+
+jobs:
+  # ------------------------------------------------------------------
+  # 1. Dependency vulnerability scan (Safety)
+  # ------------------------------------------------------------------
+  dependency-scan:
+    name: Dependency Vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt safety
+
+      - name: Run Safety vulnerability scan
+        run: safety check --full-report
+
+  # ------------------------------------------------------------------
+  # 2. Static security analysis (Bandit — OWASP checks)
+  # ------------------------------------------------------------------
+  bandit-scan:
+    name: Static Security Analysis (Bandit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Bandit
+        run: pip install bandit[toml]
+
+      - name: Run Bandit security scan
+        run: |
+          bandit -r app/ config.py run.py \
+            --severity-level medium \
+            --confidence-level medium \
+            --format txt
+
+  # ------------------------------------------------------------------
+  # 3. Code quality (Flake8 linter)
+  # ------------------------------------------------------------------
+  lint:
+    name: Code Quality (Flake8)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Flake8
+        run: pip install flake8
+
+      - name: Run Flake8
+        run: |
+          flake8 app/ config.py run.py \
+            --max-line-length=120 \
+            --exclude=__pycache__,.venv \
+            --count --statistics
+
+  # ------------------------------------------------------------------
+  # 4. CodeQL — GitHub's deep static analysis (detects injection, etc.)
+  # ------------------------------------------------------------------
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          queries: security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
