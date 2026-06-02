@@ -1,5 +1,7 @@
 ﻿# 🤖 AI DevOps Autonomous Incident Response Agent
 
+[![CI](https://github.com/RohitDeore/ai-devops-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/RohitDeore/ai-devops-agent/actions/workflows/ci.yml)
+
 > **Reduce MTTR automatically.** An AI-powered DevOps agent that monitors logs,
 > detects anomalies, performs root-cause analysis, decides the optimal remediation
 > action, executes it (or simulates it), and reports the full incident — all
