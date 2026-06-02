@@ -34,7 +34,7 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--host",
-        default="0.0.0.0",
+        default="0.0.0.0",  # nosec B104 — server intentionally binds all interfaces
         help="Bind address (default: 0.0.0.0)",
     )
     parser.add_argument(
@@ -56,7 +56,7 @@ def _parse_args() -> argparse.Namespace:
 # ---------------------------------------------------------------------------
 
 def _print_banner(host: str, port: int) -> None:
-    api_base = f"http://{host if host != '0.0.0.0' else 'localhost'}:{port}"
+    api_base = f"http://{host if host != '0.0.0.0' else 'localhost'}:{port}"  # nosec B104
     print()
     print("=" * 62)
     print("  🤖  AI DevOps Autonomous Incident Response Agent  v1.0.0")
@@ -86,8 +86,8 @@ if __name__ == "__main__":
 
     # Pull defaults from config (CLI args override)
     from config import FLASK_HOST, FLASK_PORT, FLASK_DEBUG  # noqa: E402
-    host  = args.host  if args.host  != "0.0.0.0" or not FLASK_HOST else FLASK_HOST
-    port  = args.port  if args.port  != 5000        or not FLASK_PORT  else FLASK_PORT
+    host  = args.host  if args.host  != "0.0.0.0" or not FLASK_HOST else FLASK_HOST  # nosec B104
+    port  = args.port  if args.port  != 5000       or not FLASK_PORT else FLASK_PORT
     debug = args.debug or FLASK_DEBUG
 
     app = create_app()

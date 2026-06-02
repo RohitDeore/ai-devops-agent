@@ -65,18 +65,6 @@ class ActionActuator:
     ----------
     simulation_mode : bool
         When True, all actions are simulated (logged only).
-        When False, real infrastructure calls are made.
-    """
-
-
-class ActionActuator:
-    """
-    Executes remediation actions for detected, analysed, and decided issues.
-
-    Parameters
-    ----------
-    simulation_mode : bool
-        When True, all actions are simulated (logged only).
         When False, placeholder hooks for real infrastructure calls are used.
     """
 
@@ -140,10 +128,17 @@ class ActionActuator:
         else:
             from config import AWS_REGION  # noqa: PLC0415
             try:
-                cmd = ["aws", "rds", "failover-db-cluster", "--db-cluster-identifier", "main-cluster", "--region", AWS_REGION]
+                cmd = [
+                    "aws", "rds", "failover-db-cluster",
+                    "--db-cluster-identifier", "main-cluster",
+                    "--region", AWS_REGION,
+                ]
                 proc = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                 success = proc.returncode == 0
-                result = f"AWS RDS failover {'initiated' if success else 'FAILED'}: {(proc.stdout or proc.stderr).strip()[:200]}"
+                result = (
+                    f"AWS RDS failover {'initiated' if success else 'FAILED'}: "
+                    f"{(proc.stdout or proc.stderr).strip()[:200]}"
+                )
             except FileNotFoundError:
                 success = False
                 result = "aws CLI not found — manual failover required."

@@ -16,7 +16,7 @@ limiter = Limiter(key_func=get_remote_address, default_limits=[])
 
 def create_app() -> Flask:
     """Create and configure the Flask application."""
-    from config import FLASK_ENV, REPORTS_DIR, RATE_LIMIT, LOG_FILE_PATH
+    from config import FLASK_ENV, REPORTS_DIR, RATE_LIMIT
 
     # Ensure required directories exist
     os.makedirs("logs", exist_ok=True)

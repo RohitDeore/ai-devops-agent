@@ -28,7 +28,7 @@ def _int(key: str, default: int = 0) -> int:
 # Flask
 # ---------------------------------------------------------------------------
 FLASK_ENV   = os.getenv("FLASK_ENV", "production")
-FLASK_HOST  = os.getenv("FLASK_HOST", "0.0.0.0")
+FLASK_HOST  = os.getenv("FLASK_HOST", "0.0.0.0")  # nosec B104
 FLASK_PORT  = _int("FLASK_PORT", 5000)
 FLASK_DEBUG = _bool("FLASK_DEBUG", False)
 

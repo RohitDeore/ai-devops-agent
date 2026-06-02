@@ -1,0 +1,6 @@
+[flake8]
+max-line-length = 120
+exclude = __pycache__,.venv,build,dist
+# E221/E272 — deliberate column alignment (common in config/route files)
+# E501 exceptions handled via max-line-length above
+extend-ignore = E221,E272

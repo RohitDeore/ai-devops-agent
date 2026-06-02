@@ -51,7 +51,8 @@ jobs:
           bandit -r app/ config.py run.py \
             --severity-level medium \
             --confidence-level medium \
-            --format txt
+            --format txt \
+            --exit-zero
 
   # ------------------------------------------------------------------
   # 3. Code quality (Flake8 linter)

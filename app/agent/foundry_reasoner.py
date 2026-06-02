@@ -47,7 +47,11 @@ Your response must follow this exact JSON format:
   "step2_root_cause": "...",
   "step3_options": ["option 1", "option 2", "option 3"],
   "step4_recommendation": "...",
-  "action_code": "<one of: IMMEDIATE_RESTART | FAILOVER_DATABASE | RESTART_SERVICE | RESTART_DB_CONNECTION | RESTART_AUTH_SERVICE | SCALE_UP_RESOURCES | SEND_ALERT | NO_ACTION>",
+  "action_code": (
+    "<one of: IMMEDIATE_RESTART | FAILOVER_DATABASE | RESTART_SERVICE | "
+    "RESTART_DB_CONNECTION | RESTART_AUTH_SERVICE | SCALE_UP_RESOURCES | "
+    "SEND_ALERT | NO_ACTION>"
+  ),
   "confidence": "<HIGH | MEDIUM | LOW>",
   "summary": "One sentence root cause + recommended action."
 }

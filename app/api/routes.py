@@ -108,7 +108,6 @@ def _persist_report(data: dict) -> str:
     return filepath
 
 
-
 # ---------------------------------------------------------------------------
 # Pipeline helper
 # ---------------------------------------------------------------------------
@@ -173,7 +172,7 @@ def get_logs():
             "stats":   _observer.get_log_stats(),
             "count":   len(all_logs),
         })
-    except Exception as exc:
+    except Exception:
         logger.exception("GET /logs failed")
         return jsonify({"success": False, "error": "Internal server error."}), 500
 
@@ -208,11 +207,9 @@ def write_log():
             return jsonify({"success": False, "error": "Failed to write log entry."}), 500
 
         return jsonify({"success": True, "message": "Log entry written."})
-    except Exception as exc:
+    except Exception:
         logger.exception("POST /logs/write failed")
         return jsonify({"success": False, "error": "Internal server error."}), 500
-
-
 
 
 @api_bp.route("/analyze", methods=["POST"])
@@ -249,7 +246,7 @@ def analyze_logs():
             "issues":       issues,
             "report_saved": saved_path,
         })
-    except Exception as exc:
+    except Exception:
         logger.exception("POST /analyze failed")
         return jsonify({"success": False, "error": "Internal server error."}), 500
 
@@ -280,7 +277,7 @@ def get_report():
             "report_saved": saved_path,
             **report_data,
         })
-    except Exception as exc:
+    except Exception:
         logger.exception("GET /report failed")
         return jsonify({"success": False, "error": "Internal server error."}), 500
 
@@ -294,7 +291,7 @@ def get_summary():
         _, issues = _run_pipeline()
         summary   = _reporter.generate_summary_report(issues)
         return jsonify({"success": True, "summary": summary})
-    except Exception as exc:
+    except Exception:
         logger.exception("GET /report/summary failed")
         return jsonify({"success": False, "error": "Internal server error."}), 500
 
@@ -314,7 +311,7 @@ def get_report_history():
             reverse=True,
         )
         return jsonify({"success": True, "reports": files, "count": len(files)})
-    except Exception as exc:
+    except Exception:
         logger.exception("GET /report/history failed")
         return jsonify({"success": False, "error": "Internal server error."}), 500
 
