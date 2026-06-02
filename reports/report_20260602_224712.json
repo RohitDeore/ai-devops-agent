@@ -1,0 +1,95 @@
+{
+  "summary": {
+    "summary_id": "SUM-20260602-224712",
+    "generated_at": "2026-06-02T22:47:12.086599",
+    "total_issues": 3,
+    "resolved_issues": 3,
+    "open_issues": 0,
+    "resolution_rate": "100.0%",
+    "severity_breakdown": {
+      "CRITICAL": 1,
+      "ERROR": 1,
+      "WARNING": 1
+    },
+    "actions_taken": {
+      "IMMEDIATE_RESTART": 1,
+      "RESTART_DB_CONNECTION": 1,
+      "SEND_ALERT": 1
+    },
+    "agent_loop": "Observe \u2192 Analyze \u2192 Reason \u2192 Decide \u2192 Act \u2192 Report",
+    "agent_version": "1.0.0",
+    "status": "COMPLETED"
+  },
+  "incidents": [
+    {
+      "incident_id": "INC-20260602-ISSUE-0002",
+      "generated_at": "2026-06-02T22:47:12.086518",
+      "issue": {
+        "id": "ISSUE-0002",
+        "type": "SERVICE_ISSUE",
+        "raw_log": "2024-01-01 00:00:01 CRITICAL service crashed unexpectedly",
+        "timestamp": "2024-01-01 00:00:01",
+        "line_number": 2
+      },
+      "severity": "CRITICAL",
+      "root_cause": "Service disruption \u2014 examine service logs for crash stack-traces and restart if confirmed crashed.",
+      "reasoning_method": "Rule-Based",
+      "action_taken": "IMMEDIATE_RESTART",
+      "action_description": "Immediately restart the affected service (zero-grace).",
+      "action_result": "CRITICAL: 'service-service' hard-restarted immediately (simulated).",
+      "status": "RESOLVED",
+      "metadata": {
+        "simulation_mode": "SIMULATION",
+        "executed_at": "2026-06-02T22:47:11.985473",
+        "agent_version": "1.0.0"
+      }
+    },
+    {
+      "incident_id": "INC-20260602-ISSUE-0001",
+      "generated_at": "2026-06-02T22:47:12.086547",
+      "issue": {
+        "id": "ISSUE-0001",
+        "type": "DATABASE_ISSUE",
+        "raw_log": "2024-01-01 00:00:00 ERROR Database connection timeout",
+        "timestamp": "2024-01-01 00:00:00",
+        "line_number": 1
+      },
+      "severity": "ERROR",
+      "root_cause": "Database connection timeout \u2014 likely caused by network latency, an overloaded DB server, or exhausted connection pool.",
+      "reasoning_method": "Rule-Based",
+      "action_taken": "RESTART_DB_CONNECTION",
+      "action_description": "Reset and reinitialise the database connection pool.",
+      "action_result": "DB connection pool drained and re-initialised (simulated).",
+      "status": "RESOLVED",
+      "metadata": {
+        "simulation_mode": "SIMULATION",
+        "executed_at": "2026-06-02T22:47:12.035830",
+        "agent_version": "1.0.0"
+      }
+    },
+    {
+      "incident_id": "INC-20260602-ISSUE-0003",
+      "generated_at": "2026-06-02T22:47:12.086556",
+      "issue": {
+        "id": "ISSUE-0003",
+        "type": "RESOURCE_ISSUE",
+        "raw_log": "2024-01-01 00:00:02 WARNING memory usage at 90%",
+        "timestamp": "2024-01-01 00:00:02",
+        "line_number": 3
+      },
+      "severity": "WARNING",
+      "root_cause": "High memory utilisation \u2014 likely a memory leak in the application or insufficient heap allocation; consider a rolling restart.",
+      "reasoning_method": "Rule-Based",
+      "action_taken": "SEND_ALERT",
+      "action_description": "Send a PagerDuty / Slack alert to the on-call engineer.",
+      "action_result": "Alert delivered to on-call channel (simulated): [WARNING] RESOURCE_ISSUE detected. Root cause: High memory utilisation \u2014 likely a memory leak in the",
+      "status": "RESOLVED",
+      "metadata": {
+        "simulation_mode": "SIMULATION",
+        "executed_at": "2026-06-02T22:47:12.086458",
+        "agent_version": "1.0.0"
+      }
+    }
+  ],
+  "total_incidents": 3
+}

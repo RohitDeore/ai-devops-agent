@@ -5,7 +5,6 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import pytest
 from app.agent.foundry_reasoner import FoundryReasoningEngine, get_reasoning_engine
 from app.agent.reasoner import ReasoningEngine
 

@@ -187,11 +187,11 @@ class FoundryReasoningEngine:
             # DecisionEngine's matrix still makes the final call unless overridden)
             if result.get("foundry_action_code"):
                 logger.info(
-                    "[Foundry] Issue %s → recommended action: %s (confidence: %s)",
-                    issue.get("id"),
-                    result["foundry_action_code"],
-                    result["confidence"],
-                )
+                "[Foundry] Issue %s -> recommended action: %s (confidence: %s)",
+                issue.get("id"),
+                result["foundry_action_code"],
+                result["confidence"],
+            )
                 # Override DecisionEngine action with Foundry's recommendation
                 issue["action"] = result["foundry_action_code"]
 

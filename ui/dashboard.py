@@ -30,7 +30,7 @@ if _PROJECT_ROOT not in sys.path:
 
 from app.agent.observer  import LogObserver
 from app.agent.analyzer  import LogAnalyzer
-from app.agent.foundry_reasoner import get_reasoning_engine, FoundryReasoningEngine
+from app.agent.foundry_reasoner import FoundryReasoningEngine
 from app.agent.reasoner  import ReasoningEngine
 from app.agent.decision  import DecisionEngine
 from app.agent.actuator  import ActionActuator
@@ -44,13 +44,6 @@ importlib.reload(config)  # force fresh read so new .env vars are always visible
 # Constants
 # ---------------------------------------------------------------------------
 LOG_FILE = os.path.join(_PROJECT_ROOT, config.LOG_FILE_PATH)
-
-SEVERITY_COLORS: Dict[str, str] = {
-    "CRITICAL": "#FF3B3B",
-    "ERROR":    "#FF8C00",
-    "WARNING":  "#FFD700",
-    "INFO":     "#32CD32",
-}
 
 # ---------------------------------------------------------------------------
 # Page config (must be first Streamlit call)
@@ -164,7 +157,7 @@ with st.sidebar:
     st.divider()
 
     st.subheader("⚙️ Configuration")
-    simulation_mode = st.toggle("Simulation Mode", value=True)
+    _simulation_mode = st.toggle("Simulation Mode", value=True)
 
     reasoning_choice = st.radio(
         "Reasoning Engine",

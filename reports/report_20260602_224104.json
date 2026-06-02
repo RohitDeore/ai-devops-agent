@@ -1,0 +1,157 @@
+{
+  "summary": {
+    "CRITICAL": 2,
+    "ERROR": 3,
+    "WARNING": 2,
+    "total": 7
+  },
+  "issues": [
+    {
+      "id": "ISSUE-0002",
+      "timestamp": "2024-01-01 00:00:01",
+      "severity": "CRITICAL",
+      "issue_type": "SERVICE_ISSUE",
+      "raw_log": "2024-01-01 00:00:01 CRITICAL service crashed unexpectedly",
+      "line_number": 2,
+      "root_cause": "Service disruption \u2014 examine service logs for crash stack-traces and restart if confirmed crashed.",
+      "reasoning_method": "Rule-Based",
+      "action": "IMMEDIATE_RESTART",
+      "action_description": "Immediately restart the affected service (zero-grace).",
+      "action_priority": 1,
+      "action_result": {
+        "issue_id": "ISSUE-0002",
+        "action": "IMMEDIATE_RESTART",
+        "result": "CRITICAL: 'service-service' hard-restarted immediately (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:03.707402",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0005",
+      "timestamp": "2026-06-02 10:00:01",
+      "severity": "CRITICAL",
+      "issue_type": "DATABASE_ISSUE",
+      "raw_log": "2026-06-02 10:00:01 CRITICAL Database connection refused on port 5432",
+      "line_number": 5,
+      "root_cause": "Database server actively refused the connection \u2014 verify the DB process is running and accepting connections on the expected port.",
+      "reasoning_method": "Rule-Based",
+      "action": "FAILOVER_DATABASE",
+      "action_description": "Initiate failover to the standby database replica.",
+      "action_priority": 1,
+      "action_result": {
+        "issue_id": "ISSUE-0005",
+        "action": "FAILOVER_DATABASE",
+        "result": "Database failover to standby replica completed (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:03.758334",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0001",
+      "timestamp": "2024-01-01 00:00:00",
+      "severity": "ERROR",
+      "issue_type": "DATABASE_ISSUE",
+      "raw_log": "2024-01-01 00:00:00 ERROR Database connection timeout",
+      "line_number": 1,
+      "root_cause": "Database connection timeout \u2014 likely caused by network latency, an overloaded DB server, or exhausted connection pool.",
+      "reasoning_method": "Rule-Based",
+      "action": "RESTART_DB_CONNECTION",
+      "action_description": "Reset and reinitialise the database connection pool.",
+      "action_priority": 2,
+      "action_result": {
+        "issue_id": "ISSUE-0001",
+        "action": "RESTART_DB_CONNECTION",
+        "result": "DB connection pool drained and re-initialised (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:03.809977",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0006",
+      "timestamp": "2026-06-02 10:00:02",
+      "severity": "ERROR",
+      "issue_type": "AUTH_ISSUE",
+      "raw_log": "2026-06-02 10:00:02 ERROR Authentication failed for user admin",
+      "line_number": 6,
+      "root_cause": "Authentication failure \u2014 invalid credentials supplied or the identity provider is returning errors.",
+      "reasoning_method": "Rule-Based",
+      "action": "RESTART_AUTH_SERVICE",
+      "action_description": "Restart the authentication / identity service.",
+      "action_priority": 2,
+      "action_result": {
+        "issue_id": "ISSUE-0006",
+        "action": "RESTART_SERVICE",
+        "result": "Service 'auth-service' restarted successfully (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:03.861392",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0008",
+      "timestamp": "2026-06-02 10:00:04",
+      "severity": "ERROR",
+      "issue_type": "SERVICE_ISSUE",
+      "raw_log": "2026-06-02 10:00:04 ERROR service health check FAILED",
+      "line_number": 8,
+      "root_cause": "Service health-check failure \u2014 the container/process has likely crashed; trigger a graceful restart.",
+      "reasoning_method": "Rule-Based",
+      "action": "RESTART_SERVICE",
+      "action_description": "Gracefully restart the affected service.",
+      "action_priority": 2,
+      "action_result": {
+        "issue_id": "ISSUE-0008",
+        "action": "RESTART_SERVICE",
+        "result": "Service 'service-service' restarted successfully (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:03.913381",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0003",
+      "timestamp": "2024-01-01 00:00:02",
+      "severity": "WARNING",
+      "issue_type": "RESOURCE_ISSUE",
+      "raw_log": "2024-01-01 00:00:02 WARNING memory usage at 90%",
+      "line_number": 3,
+      "root_cause": "High memory utilisation \u2014 likely a memory leak in the application or insufficient heap allocation; consider a rolling restart.",
+      "reasoning_method": "Rule-Based",
+      "action": "SEND_ALERT",
+      "action_description": "Send a PagerDuty / Slack alert to the on-call engineer.",
+      "action_priority": 4,
+      "action_result": {
+        "issue_id": "ISSUE-0003",
+        "action": "SEND_ALERT",
+        "result": "Alert delivered to on-call channel (simulated): [WARNING] RESOURCE_ISSUE detected. Root cause: High memory utilisation \u2014 likely a memory leak in the",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:03.969990",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0007",
+      "timestamp": "2026-06-02 10:00:03",
+      "severity": "WARNING",
+      "issue_type": "RESOURCE_ISSUE",
+      "raw_log": "2026-06-02 10:00:03 WARNING Memory usage at 91%",
+      "line_number": 7,
+      "root_cause": "High memory utilisation \u2014 likely a memory leak in the application or insufficient heap allocation; consider a rolling restart.",
+      "reasoning_method": "Rule-Based",
+      "action": "SEND_ALERT",
+      "action_description": "Send a PagerDuty / Slack alert to the on-call engineer.",
+      "action_priority": 4,
+      "action_result": {
+        "issue_id": "ISSUE-0007",
+        "action": "SEND_ALERT",
+        "result": "Alert delivered to on-call channel (simulated): [WARNING] RESOURCE_ISSUE detected. Root cause: High memory utilisation \u2014 likely a memory leak in the",
+        "success": true,
+        "executed_at": "2026-06-02T22:41:04.024252",
+        "mode": "SIMULATION"
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "CRITICAL": 1,
+    "ERROR": 1,
+    "WARNING": 1,
+    "total": 3
+  },
+  "issues": [
+    {
+      "id": "ISSUE-0002",
+      "timestamp": "2024-01-01 00:00:01",
+      "severity": "CRITICAL",
+      "issue_type": "SERVICE_ISSUE",
+      "raw_log": "2024-01-01 00:00:01 CRITICAL service crashed unexpectedly",
+      "line_number": 2,
+      "root_cause": "Service disruption \u2014 examine service logs for crash stack-traces and restart if confirmed crashed.",
+      "reasoning_method": "Rule-Based",
+      "action": "IMMEDIATE_RESTART",
+      "action_description": "Immediately restart the affected service (zero-grace).",
+      "action_priority": 1,
+      "action_result": {
+        "issue_id": "ISSUE-0002",
+        "action": "IMMEDIATE_RESTART",
+        "result": "CRITICAL: 'service-service' hard-restarted immediately (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:33:36.890680",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0001",
+      "timestamp": "2024-01-01 00:00:00",
+      "severity": "ERROR",
+      "issue_type": "DATABASE_ISSUE",
+      "raw_log": "2024-01-01 00:00:00 ERROR Database connection timeout",
+      "line_number": 1,
+      "root_cause": "Database connection timeout \u2014 likely caused by network latency, an overloaded DB server, or exhausted connection pool.",
+      "reasoning_method": "Rule-Based",
+      "action": "RESTART_DB_CONNECTION",
+      "action_description": "Reset and reinitialise the database connection pool.",
+      "action_priority": 2,
+      "action_result": {
+        "issue_id": "ISSUE-0001",
+        "action": "RESTART_DB_CONNECTION",
+        "result": "DB connection pool drained and re-initialised (simulated).",
+        "success": true,
+        "executed_at": "2026-06-02T22:33:36.941315",
+        "mode": "SIMULATION"
+      }
+    },
+    {
+      "id": "ISSUE-0003",
+      "timestamp": "2024-01-01 00:00:02",
+      "severity": "WARNING",
+      "issue_type": "RESOURCE_ISSUE",
+      "raw_log": "2024-01-01 00:00:02 WARNING memory usage at 90%",
+      "line_number": 3,
+      "root_cause": "High memory utilisation \u2014 likely a memory leak in the application or insufficient heap allocation; consider a rolling restart.",
+      "reasoning_method": "Rule-Based",
+      "action": "SEND_ALERT",
+      "action_description": "Send a PagerDuty / Slack alert to the on-call engineer.",
+      "action_priority": 4,
+      "action_result": {
+        "issue_id": "ISSUE-0003",
+        "action": "SEND_ALERT",
+        "result": "Alert delivered to on-call channel (simulated): [WARNING] RESOURCE_ISSUE detected. Root cause: High memory utilisation \u2014 likely a memory leak in the",
+        "success": true,
+        "executed_at": "2026-06-02T22:33:36.991762",
+        "mode": "SIMULATION"
+      }
+    }
+  ]
+}

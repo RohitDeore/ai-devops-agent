@@ -65,7 +65,8 @@ def require_api_key(f):
         key = request.headers.get("X-API-Key", "")
         if not key or key != config.API_KEY:
             logger.warning(
-                "Unauthorized API access attempt from %s", request.remote_addr
+                "Unauthorized API access attempt from %s",
+                request.remote_addr,  # IP only — no user-supplied data logged
             )
             return jsonify({"success": False, "error": "Unauthorized — invalid or missing X-API-Key header."}), 401
         return f(*args, **kwargs)
