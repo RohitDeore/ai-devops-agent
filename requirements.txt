@@ -1,0 +1,23 @@
+# Core web framework
+flask>=3.0.0
+
+# Production WSGI server
+gunicorn>=21.2.0
+
+# Rate limiting
+flask-limiter>=3.5.0
+
+# Streamlit dashboard
+streamlit>=1.35.0
+
+# HTTP client (dashboard → Flask API calls, actuator alerts)
+requests>=2.31.0
+
+# Data manipulation for dashboard tables/charts
+pandas>=2.1.0
+
+# Optional: AI-powered reasoning via OpenAI
+openai>=1.12.0
+
+# Environment variable management (.env support)
+python-dotenv>=1.0.0
